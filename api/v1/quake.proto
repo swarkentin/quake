@@ -9,10 +9,10 @@
 syntax = "proto3";
 
 package quake.api.v1;
- 
-option go_package = "v1";
 
-// EarthquakeCollection represents a feature collection of earthquakes based on 
+option go_package = ".";
+
+// EarthquakeCollection represents a feature collection of earthquakes based on
 // the "GeoJSON Summary Format" of the USGS Earthquake Hazards program.
 message EarthquakeCollection {
     // Metadata for a set of earthquakes.
@@ -22,16 +22,16 @@ message EarthquakeCollection {
     GeoBoundsE7 bounds = 2;
 
     // Features contains a list of Earthquake objects.
-    repeated Earthquake features = 3; 
+    repeated Earthquake features = 3;
 }
 
 // Earthquake feature with position (point geometry) and some key properties.
 message Earthquake {
-    // USGS docs: "A (generally) two-character network identifier with a (generally) 
-    // eight-character network-assigned code. A unique identifier for the event. 
+    // USGS docs: "A (generally) two-character network identifier with a (generally)
+    // eight-character network-assigned code. A unique identifier for the event.
     // This is the current preferred id for the event, and may change over time".
     string id = 1;
-    
+
     // USGS docs: "The coordinates of the epicenter in the WGS84 reference frame and
     // the depth where the earthquake begins to rupture".
     GeoPointE7 position = 2;
@@ -59,7 +59,7 @@ message Earthquake {
     // USGS docs: "The suggested level of response".
     Alert alert = 8;
 
-    // USGS docs: "A number describing how significant the event is. Larger numbers indicate 
+    // USGS docs: "A number describing how significant the event is. Larger numbers indicate
     // a more significant event". Typical value range is [0, 1000].
     // GeoJSON property: "sig".
     int32 significance = 9;
@@ -70,8 +70,8 @@ message Earthquake {
 
 // Earthquake detailed properties.
 message EarthquakeDetails {
-    // USGS docs: "A (generally) two-character network identifier with a (generally) 
-    // eight-character network-assigned code. A unique identifier for the event. 
+    // USGS docs: "A (generally) two-character network identifier with a (generally)
+    // eight-character network-assigned code. A unique identifier for the event.
     // This is the current preferred id for the event, and may change over time".
     string id = 1;
 
@@ -81,7 +81,7 @@ message EarthquakeDetails {
     // USGS docs: "Link to GeoJSON detail feed from a GeoJSON summary feed".
     // GeoJSON property: "detail".
     string detail_feed_url = 3;
-    
+
     // USGS docs: "The total number of felt reports submitted to the DYFI? system".
     // Typical values: [44, 843].
     int32 felt = 4;
@@ -91,7 +91,7 @@ message EarthquakeDetails {
     // GeoJSON property: "cdi".
     float reported_intensity = 5;
 
-    // USGS docs: "The maximum estimated instrumental intensity for the event. 
+    // USGS docs: "The maximum estimated instrumental intensity for the event.
     // Computed by ShakeMap". Typical value range is [0.0, 10.0].
     // GeoJSON property: "mmi".
     float estimated_intensity = 6;
@@ -99,17 +99,17 @@ message EarthquakeDetails {
     // USGS docs: "Status indicates whether the event has been reviewed by a human".
     Status status = 7;
 
-    // USGS docs: "True for large events in oceanic regions, false otherwise. Does not 
+    // USGS docs: "True for large events in oceanic regions, false otherwise. Does not
     // indicate if a tsunami actually did or will exist".
     bool tsunami = 8;
 
-    // USGS docs: "The ID of a data contributor. Identifies the network considered to be 
+    // USGS docs: "The ID of a data contributor. Identifies the network considered to be
     // the preferred source of information for this event". Typical values:
     // ak, at, ci, hv, ld, mb, nc, nm, nn, pr, pt, se, us, uu, uw.
     // GeoJSON property: "net".
     string network = 9;
 
-    // USGS docs: "An identifying code assigned by - and unique from - the corresponding 
+    // USGS docs: "An identifying code assigned by - and unique from - the corresponding
     // source for the event". Typical values: "2013lgaz", "c000f1jy", "71935551".
     string code = 10;
 
@@ -121,34 +121,34 @@ message EarthquakeDetails {
     // Typical values: ",us,nc,ci,".
     string sources = 12;
 
-    // USGS docs: "A comma-separated list of product types associated to this event". 
+    // USGS docs: "A comma-separated list of product types associated to this event".
     // Typical values: “,cap,dyfi,general-link,origin,p-wave-travel-times,phase-data,”.
     // GeoJSON property: "types".
     string product_types = 13;
 
-    // USGS docs: "The total number of seismic stations used to determine 
+    // USGS docs: "The total number of seismic stations used to determine
     // earthquake location".
     int32 nst = 14;
 
-    // USGS docs: "Horizontal distance from the epicenter to the nearest station (in 
+    // USGS docs: "Horizontal distance from the epicenter to the nearest station (in
     // degrees)". Typical values: [0.4, 7.1].
     float dmin = 15;
 
-    // USGS docs: "The root-mean-square (RMS) travel time residual, in sec, using all 
+    // USGS docs: "The root-mean-square (RMS) travel time residual, in sec, using all
     // weights". Typical values: [0.13,1.39].
     float rms = 16;
 
-    // USGS docs: "The largest azimuthal gap between azimuthally adjacent stations (in 
+    // USGS docs: "The largest azimuthal gap between azimuthally adjacent stations (in
     // degrees)"". Typical values: [0.0, 180.0].
     float gap = 17;
 
-    // USGS docs: "The method or algorithm used to calculate the preferred magnitude for the 
+    // USGS docs: "The method or algorithm used to calculate the preferred magnitude for the
     // event". Typical values: “Md”, “Ml”, “Ms”, “Mw”, “Me”, “Mi”, “Mb”, “MLg”.
-    // More information: 
+    // More information:
     // https://www.usgs.gov/natural-hazards/earthquake-hazards/science/magnitude-types?qt-science_center_objects=0#qt-science_center_objects
     string mag_type = 18;
 
-    // USGS docs: "Type of seismic event". 
+    // USGS docs: "Type of seismic event".
     Type type = 19;
 }
 
@@ -161,8 +161,8 @@ message EarthquakeMetadata {
     // USGS docs: "Url of the feed".
     string url = 2;
 
-    // USGS docs: "The title of the feed". Typical values: 
-    // “USGS Magnitude 1+ Earthquakes, Past Day”, 
+    // USGS docs: "The title of the feed". Typical values:
+    // “USGS Magnitude 1+ Earthquakes, Past Day”,
     // “USGS Magnitude 4.5+ Earthquakes, Past Month”
     string title = 3;
 
@@ -178,7 +178,7 @@ message EarthquakeMetadata {
 
 // Alert according to https://earthquake.usgs.gov/data/pager/background.php
 enum Alert {
-    ALERT_UNSPECIFIED = 0; 
+    ALERT_UNSPECIFIED = 0;
 
     // The suggested levels of response: international.
     ALERT_RED = 1;
@@ -215,7 +215,7 @@ enum Type {
     TYPE_QUARRY = 2;
 }
 
-// GeoBoundsE7 is a geographic bounding box (WGS84 latitude and longitude 
+// GeoBoundsE7 is a geographic bounding box (WGS84 latitude and longitude
 // are in E7 format, height is centimeters with negative values meaning depth).
 // The E7 format with 32 bit ints is used to optimize wire transfer.
 message GeoBoundsE7 {

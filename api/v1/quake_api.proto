@@ -5,11 +5,11 @@ syntax = "proto3";
 
 package quake.api.v1;
 
-option go_package = "v1";
+option go_package = ".";
 
-import "quake/api/v1/quake.proto";
+import "quake.proto";
 
-// QuakeService provides RPC for data available on the web service of the USGS 
+// QuakeService provides RPC for data available on the web service of the USGS
 // Earthquake Hazards program (as "GeoJSON Summary Format").
 service QuakeService {
 
