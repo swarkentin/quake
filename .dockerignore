@@ -1,0 +1,15 @@
+# No git
+.git
+
+# Ignore generated protobuf files - they are
+# generated in the image
+*.pb.go
+
+# Likewise with generated grpc-gateway files
+*.pb.gw.go
+
+# Swagger will be generated as part of image build
+*.swagger.json
+
+# No dockerfiles in docker iamge
+*.Dockerfile
